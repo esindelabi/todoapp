@@ -1,0 +1,77 @@
+ALGORITHME TodoApp
+
+VARIABLES
+    taches : TABLEAU DE CHAINE // pour stocker les tâches, par exemple : ["Faire les courses", "Apprendre React"]
+    nouvelleTache : CHAINE // pour le texte de la nouvelle tâche à ajouter
+    choixUtilisateur : ENTIER // pour le choix de l'utilisateur dans le menu
+
+DEBUT
+
+    // Initialisation
+    taches ← VIDE
+    
+    // Boucle principale de l'application
+    TANT QUE choixUtilisateur != 5 FAIRE
+    
+        // Afficher le menu principal
+        AFFICHER "--- Menu de l'application Todo ---"
+        AFFICHER "1. Afficher les tâches"
+        AFFICHER "2. Ajouter une tâche"
+        AFFICHER "3. Marquer une tâche comme terminée"
+        AFFICHER "4. Supprimer une tâche"
+        AFFICHER "5. Quitter"
+        AFFICHER "-----------------------------------"
+        LIRE choixUtilisateur
+
+        // Gérer le choix de l'utilisateur
+        SI choixUtilisateur = 1 ALORS
+            // Afficher les tâches
+            SI taches EST VIDE ALORS
+                AFFICHER "Aucune tâche à afficher."
+            SINON
+                POUR chaque tache DANS taches FAIRE
+                    AFFICHER tache
+                FINPOUR
+            FINSI
+
+        SINON SI choixUtilisateur = 2 ALORS
+            // Ajouter une tâche
+            AFFICHER "Entrez la nouvelle tâche :"
+            LIRE nouvelleTache
+            AJOUTER nouvelleTache À taches
+            AFFICHER "Tâche ajoutée avec succès !"
+
+        SINON SI choixUtilisateur = 3 ALORS
+            // Marquer une tâche comme terminée
+            SI taches EST VIDE ALORS
+                AFFICHER "Aucune tâche à marquer."
+            SINON
+                AFFICHER "Entrez le numéro de la tâche à marquer comme terminée :"
+                LIRE numeroTache
+                // Note : En React, on mettrait à jour un état plutôt que de simplement afficher.
+                // Ici, on peut par exemple ajouter un indicateur de complétion.
+                taches[numeroTache - 1] ← taches[numeroTache - 1] + " [TERMINÉE]"
+                AFFICHER "Tâche marquée comme terminée."
+            FINSI
+
+        SINON SI choixUtilisateur = 4 ALORS
+            // Supprimer une tâche
+            SI taches EST VIDE ALORS
+                AFFICHER "Aucune tâche à supprimer."
+            SINON
+                AFFICHER "Entrez le numéro de la tâche à supprimer :"
+                LIRE numeroTache
+                SUPPRIMER L'ÉLÉMENT À L'INDICE (numeroTache - 1) DANS taches
+                AFFICHER "Tâche supprimée avec succès."
+            FINSI
+
+        SINON SI choixUtilisateur = 5 ALORS
+            AFFICHER "Au revoir !"
+        
+        SINON
+            AFFICHER "Choix invalide. Veuillez réessayer."
+        FINSI
+
+    FINTANTQUE
+
+FIN
